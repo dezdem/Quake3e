@@ -2506,7 +2506,7 @@ For controlling environment variables
 
 void Com_ExecuteCfg(void)
 {
-	Cbuf_ExecuteText(EXEC_NOW, "exec default.cfg\n");
+	// Cbuf_ExecuteText(EXEC_NOW, "exec default.cfg\n"); // skipped that line in order to prevent r_mode overwriting in CPMA
 	Cbuf_Execute(); // Always execute after exec to prevent text buffer overflowing
 
 	if(!Com_SafeMode())
@@ -2573,7 +2573,7 @@ Expose possibility to change current running mod to the user
 
 void Com_GameRestart_f(void)
 {
-	Cvar_Set("fs_game", Cmd_Argv(1));
+	Cvar_Set("fs_game", "cpma");
 
 	Com_GameRestart(0, qtrue);
 }
@@ -3056,7 +3056,7 @@ void Com_Init( char *commandLine ) {
 	// init commands and vars
 	//
 #ifndef DEDICATED
-	com_maxfps = Cvar_Get( "com_maxfps", "125", 0 ); // try to force that in some light way
+	com_maxfps = Cvar_Get( "com_maxfps", "250", 0 ); // try to force that in some light way
 	com_maxfpsUnfocused = Cvar_Get ("com_maxfpsUnfocused", "60", CVAR_ARCHIVE_ND );
 	com_maxfpsMinimized = Cvar_Get ("com_maxfpsMinimized", "30", CVAR_ARCHIVE_ND );
 	com_yieldCPU = Cvar_Get( "com_yieldCPU", "1", CVAR_ARCHIVE_ND );
@@ -3092,8 +3092,8 @@ void Com_Init( char *commandLine ) {
 	Cvar_Get( "com_errorMessage", "", CVAR_ROM | CVAR_NORESTART );
 
 #ifndef DEDICATED
-	com_introPlayed = Cvar_Get( "com_introplayed", "0", CVAR_ARCHIVE );
-	com_skipIdLogo  = Cvar_Get( "com_skipIdLogo", "0", CVAR_ARCHIVE );
+	com_introPlayed = Cvar_Get( "com_introplayed", "1", CVAR_ARCHIVE );
+	com_skipIdLogo  = Cvar_Get( "com_skipIdLogo", "1", CVAR_ARCHIVE );
 #endif
 
 	if ( com_dedicated->integer ) {
@@ -3382,7 +3382,7 @@ void Com_Frame( qboolean demoPlaying ) {
 	timeAfter = 0;
 
 	// write config file if anything changed
-	Com_WriteConfiguration();
+	// Com_WriteConfiguration(); // in order to prevent config auto-writing
 
 	// if "viewlog" has been modified, show or hide the log console
 	if ( com_viewlog->modified ) {

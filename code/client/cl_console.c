@@ -733,7 +733,7 @@ void Con_DrawSolidConsole( float frac ) {
 	color[0] = 0; // console bottom line color
 	color[1] = 0;
 	color[2] = 0;
-	color[3] = 1;
+	color[3] = 0; // version color in console
 
 	re.SetColor( color );
 	re.DrawStretchPic( 0, yf, wf, 2, 0, 0, 1, 1, cls.whiteShader );

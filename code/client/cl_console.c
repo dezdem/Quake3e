@@ -730,7 +730,7 @@ void Con_DrawSolidConsole( float frac ) {
 
 	}
 
-	color[0] = 1;
+	color[0] = 0; // console bottom line color
 	color[1] = 0;
 	color[2] = 0;
 	color[3] = 1;
